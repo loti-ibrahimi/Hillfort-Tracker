@@ -1,4 +1,4 @@
-package org.wit.placemark.activites
+package org.wit.placemark.activities
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
