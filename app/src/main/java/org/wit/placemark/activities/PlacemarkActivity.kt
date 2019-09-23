@@ -12,6 +12,7 @@ import org.wit.placemark.models.PlacemarkModel
 class PlacemarkActivity : AppCompatActivity(), AnkoLogger {
 
     var placemark = PlacemarkModel()
+    //Exercise 3: Create ArrayList.
     val placemarks = ArrayList<PlacemarkModel>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -23,6 +24,7 @@ class PlacemarkActivity : AppCompatActivity(), AnkoLogger {
             placemark.title = placemarkTitle.text.toString()
             if(placemark.title.isNotEmpty()) {
                 info("[Add] Button Pressed: $placemarkTitle")
+                // Populate 'placemarks' array & log contents.
                 placemarks.add(placemark);
                 info("All Placemarks: $placemarks")
             }
