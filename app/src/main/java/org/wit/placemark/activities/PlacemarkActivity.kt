@@ -13,8 +13,9 @@ import org.wit.placemark.models.PlacemarkModel
 class PlacemarkActivity : AppCompatActivity(), AnkoLogger {
 
     var placemark = PlacemarkModel()
-    // Reference to MainApp object
-    var app :  MainApp? = null
+    // Reference to MainApp object:
+    // lateint qualifier:
+    lateinit var app: MainApp
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -25,14 +26,12 @@ class PlacemarkActivity : AppCompatActivity(), AnkoLogger {
         btnAdd.setOnClickListener() {
             placemark.title = placemarkTitle.text.toString()
             placemark.description = placemarkDescription.text.toString()
-
             if(placemark.title.isNotEmpty() && placemark.description.isNotEmpty()) {
                 // MainApp object being used.
-                // '!!' returns output as non-null & throws exception otherwise.
-                app!!.placemarks.add(placemark.copy())
-                info("[Add] Button Pressed: $placemarkTitle")
-                for (i in app!!.placemarks.indices) {
-                    info("Placemark[$i]:${app!!.placemarks[i]}")
+                app.placemarks.add(placemark.copy())
+                info("[Add] Button Pressed: ${placemark}")
+                for (i in app.placemarks.indices) {
+                    info("Placemark[$i]:${app.placemarks[i]}")
                 }
             }
             else {
