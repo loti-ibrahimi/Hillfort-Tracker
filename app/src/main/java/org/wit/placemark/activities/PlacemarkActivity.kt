@@ -3,6 +3,7 @@ package org.wit.placemark.activities
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import kotlinx.android.synthetic.main.activity_placemark.*
+import kotlinx.android.synthetic.main.activity_placemark_list.*
 import org.jetbrains.anko.AnkoLogger
 import org.jetbrains.anko.info
 import org.jetbrains.anko.toast
@@ -33,8 +34,9 @@ class PlacemarkActivity : AppCompatActivity(), AnkoLogger {
                 for (i in app.placemarks.indices) {
                     info("Placemark[$i]:${app.placemarks[i]}")
                 }
-            }
-            else {
+                setResult(AppCompatActivity.RESULT_OK)
+                finish()
+            } else {
                 toast ("Please Enter a title & description")
             }
         }
