@@ -31,7 +31,7 @@ class PlacemarkActivity : AppCompatActivity(), AnkoLogger {
             placemark.title = placemarkTitle.text.toString()
             placemark.description = placemarkDescription.text.toString()
             if(placemark.title.isNotEmpty() && placemark.description.isNotEmpty()) {
-                // 'Create' method of MainApp object being used.
+                // 'Create' method of PlacemarkMemStore via MainApp object being used.
                 app.placemarks.create(placemark.copy())
                 info("[Add] Button Pressed: ${placemark}")
 //                for (i in app.placemarks.indices) {
