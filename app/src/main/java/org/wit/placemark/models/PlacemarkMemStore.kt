@@ -31,7 +31,7 @@ class PlacemarkMemStore : PlacemarkStore, AnkoLogger {
         }
     }
 
-    internal fun logAll() {
+    fun logAll() {
         placemarks.forEach{ info("${it}") }
     }
 }
