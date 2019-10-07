@@ -17,6 +17,7 @@ class PlacemarkActivity : AppCompatActivity(), AnkoLogger {
     var placemark = PlacemarkModel()
     // lateint qualifier | Reference to MainApp object:
     lateinit var app: MainApp
+    var edit = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,6 +30,7 @@ class PlacemarkActivity : AppCompatActivity(), AnkoLogger {
         app = application as MainApp
 
         if (intent.hasExtra("placemark_edit")) {
+            edit = true
             placemark = intent.extras?.getParcelable<PlacemarkModel>("placemark_edit")!!
             placemarkTitle.setText(placemark.title)
             placemarkDescription.setText(placemark.description)
@@ -38,15 +40,19 @@ class PlacemarkActivity : AppCompatActivity(), AnkoLogger {
         btnAdd.setOnClickListener() {
             placemark.title = placemarkTitle.text.toString()
             placemark.description = placemarkDescription.text.toString()
-            if(placemark.title.isNotEmpty() && placemark.description.isNotEmpty()) {
-                // 'Create' method of PlacemarkMemStore via MainApp object being used.
-                app.placemarks.create(placemark.copy())
-                info("[Add] Button Pressed: ${placemark}")
-                setResult(AppCompatActivity.RESULT_OK)
-                finish()
-            } else {
+            // 'Create' OR 'Save' method of PlacemarkMemStore via MainApp object being used.
+            if(placemark.title.isEmpty() && placemark.description.isEmpty()) {
                 toast(R.string.enter_placemark_title)
+            } else {
+                if (edit) {
+                    app.placemarks.update(placemark.copy())
+                } else {
+                    app.placemarks.create(placemark.copy())
+                }
             }
+            info("[Add] Button Pressed: ${placemark}")
+            setResult(AppCompatActivity.RESULT_OK)
+            finish()
         }
     }
 
