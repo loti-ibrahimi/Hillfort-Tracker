@@ -5,6 +5,8 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import kotlinx.android.synthetic.main.activity_placemark.*
+import kotlinx.android.synthetic.main.activity_placemark.placemarkTitle
+import kotlinx.android.synthetic.main.card_placemark.*
 import org.jetbrains.anko.AnkoLogger
 import org.jetbrains.anko.info
 import org.jetbrains.anko.toast
@@ -15,8 +17,7 @@ import org.wit.placemark.models.PlacemarkModel
 class PlacemarkActivity : AppCompatActivity(), AnkoLogger {
 
     var placemark = PlacemarkModel()
-    // Reference to MainApp object:
-    // lateint qualifier:
+    // lateint qualifier | Reference to MainApp object:
     lateinit var app: MainApp
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -24,8 +25,15 @@ class PlacemarkActivity : AppCompatActivity(), AnkoLogger {
         setContentView(R.layout.activity_placemark)
         toolbarAdd.title = title
         setSupportActionBar(toolbarAdd)
+
         // Initialisation of MainApp object.
         app = application as MainApp
+
+        if (intent.hasExtra("placemark_edit")) {
+            placemark = intent.extras?.getParcelable<PlacemarkModel>("placemark_edit")!!
+            placemarkTitle.setText(placemark.title)
+            description.setText(placemark.description)
+        }
 
         btnAdd.setOnClickListener() {
             placemark.title = placemarkTitle.text.toString()
@@ -34,9 +42,6 @@ class PlacemarkActivity : AppCompatActivity(), AnkoLogger {
                 // 'Create' method of PlacemarkMemStore via MainApp object being used.
                 app.placemarks.create(placemark.copy())
                 info("[Add] Button Pressed: ${placemark}")
-//                for (i in app.placemarks.indices) {
-//                    info("Placemark[$i]:${app.placemarks[i]}")
-//                }
                 setResult(AppCompatActivity.RESULT_OK)
                 finish()
             } else {
