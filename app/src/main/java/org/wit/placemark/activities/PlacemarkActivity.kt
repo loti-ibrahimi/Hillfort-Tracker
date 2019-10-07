@@ -2,8 +2,8 @@ package org.wit.placemark.activities
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.Menu
 import kotlinx.android.synthetic.main.activity_placemark.*
-import kotlinx.android.synthetic.main.activity_placemark_list.*
 import org.jetbrains.anko.AnkoLogger
 import org.jetbrains.anko.info
 import org.jetbrains.anko.toast
@@ -21,6 +21,8 @@ class PlacemarkActivity : AppCompatActivity(), AnkoLogger {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_placemark)
+        toolbarAdd.title = title
+        setSupportActionBar(toolbarAdd)
         // Initialisation of MainApp object.
         app = application as MainApp
 
@@ -40,5 +42,10 @@ class PlacemarkActivity : AppCompatActivity(), AnkoLogger {
                 toast ("Please Enter a title & description")
             }
         }
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.menu_placemark, menu)
+        return super.onCreateOptionsMenu(menu)
     }
 }
