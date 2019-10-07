@@ -5,8 +5,6 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import kotlinx.android.synthetic.main.activity_placemark.*
-import kotlinx.android.synthetic.main.activity_placemark.placemarkTitle
-import kotlinx.android.synthetic.main.card_placemark.*
 import org.jetbrains.anko.AnkoLogger
 import org.jetbrains.anko.info
 import org.jetbrains.anko.toast
@@ -25,6 +23,7 @@ class PlacemarkActivity : AppCompatActivity(), AnkoLogger {
         setContentView(R.layout.activity_placemark)
         toolbarAdd.title = title
         setSupportActionBar(toolbarAdd)
+        info("Placemark Activity started..")
 
         // Initialisation of MainApp object.
         app = application as MainApp
@@ -32,7 +31,8 @@ class PlacemarkActivity : AppCompatActivity(), AnkoLogger {
         if (intent.hasExtra("placemark_edit")) {
             placemark = intent.extras?.getParcelable<PlacemarkModel>("placemark_edit")!!
             placemarkTitle.setText(placemark.title)
-            description.setText(placemark.description)
+            placemarkDescription.setText(placemark.description)
+            btnAdd.setText(R.string.save_placemark)
         }
 
         btnAdd.setOnClickListener() {
@@ -45,7 +45,7 @@ class PlacemarkActivity : AppCompatActivity(), AnkoLogger {
                 setResult(AppCompatActivity.RESULT_OK)
                 finish()
             } else {
-                toast ("Please Enter a title & description")
+                toast(R.string.enter_placemark_title)
             }
         }
     }
