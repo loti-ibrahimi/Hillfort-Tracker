@@ -1,7 +1,6 @@
 package org.wit.placemark.activities
 
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
