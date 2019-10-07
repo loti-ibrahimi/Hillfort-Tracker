@@ -17,7 +17,6 @@ class PlacemarkActivity : AppCompatActivity(), AnkoLogger {
     var placemark = PlacemarkModel()
     // lateint qualifier | Reference to MainApp object:
     lateinit var app: MainApp
-    var edit = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,6 +27,8 @@ class PlacemarkActivity : AppCompatActivity(), AnkoLogger {
 
         // Initialisation of MainApp object.
         app = application as MainApp
+
+        var edit = false
 
         if (intent.hasExtra("placemark_edit")) {
             edit = true
@@ -53,6 +54,10 @@ class PlacemarkActivity : AppCompatActivity(), AnkoLogger {
             info("[Add] Button Pressed: ${placemark}")
             setResult(AppCompatActivity.RESULT_OK)
             finish()
+        }
+
+        chooseImage.setOnClickListener {
+            info ("Select image")
         }
     }
 
