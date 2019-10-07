@@ -31,12 +31,12 @@ class PlacemarkActivity : AppCompatActivity(), AnkoLogger {
             placemark.title = placemarkTitle.text.toString()
             placemark.description = placemarkDescription.text.toString()
             if(placemark.title.isNotEmpty() && placemark.description.isNotEmpty()) {
-                // MainApp object being used.
-                app.placemarks.add(placemark.copy())
+                // 'Create' method of MainApp object being used.
+                app.placemarks.create(placemark.copy())
                 info("[Add] Button Pressed: ${placemark}")
-                for (i in app.placemarks.indices) {
-                    info("Placemark[$i]:${app.placemarks[i]}")
-                }
+//                for (i in app.placemarks.indices) {
+//                    info("Placemark[$i]:${app.placemarks[i]}")
+//                }
                 setResult(AppCompatActivity.RESULT_OK)
                 finish()
             } else {
