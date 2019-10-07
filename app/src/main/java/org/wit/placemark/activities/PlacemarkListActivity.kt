@@ -1,7 +1,5 @@
 package org.wit.placemark.activities
 
-import PlacemarkAdapter
-import PlacemarkListener
 import android.os.Bundle
 import android.view.*
 import androidx.appcompat.app.AppCompatActivity
