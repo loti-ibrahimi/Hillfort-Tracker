@@ -1,16 +1,19 @@
 package org.wit.placemark.activities
 
 import PlacemarkAdapter
+import PlacemarkListener
 import android.os.Bundle
 import android.view.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.activity_placemark_list.*
+import org.jetbrains.anko.intentFor
 import org.jetbrains.anko.startActivityForResult
 import org.wit.placemark.R
 import org.wit.placemark.main.MainApp
+import org.wit.placemark.models.PlacemarkModel
 
-class PlacemarkListActivity : AppCompatActivity() {
+class PlacemarkListActivity : AppCompatActivity(), PlacemarkListener {
 
     lateinit var app: MainApp
 
@@ -23,7 +26,7 @@ class PlacemarkListActivity : AppCompatActivity() {
 
         val layoutManager = LinearLayoutManager(this)
         recyclerView.layoutManager = layoutManager
-        recyclerView.adapter = PlacemarkAdapter(app.placemarks.findAll())
+        recyclerView.adapter = PlacemarkAdapter(app.placemarks.findAll(), this)
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -36,5 +39,9 @@ class PlacemarkListActivity : AppCompatActivity() {
             R.id.item_add -> startActivityForResult<PlacemarkActivity>(0)
         }
         return super.onOptionsItemSelected(item)
+    }
+
+    override fun onPlacemarkClick(placemark: PlacemarkModel) {
+        startActivityForResult(intentFor<PlacemarkActivity>(), 0)
     }
 }
