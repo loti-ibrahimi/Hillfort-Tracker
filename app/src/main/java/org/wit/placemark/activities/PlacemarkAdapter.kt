@@ -1,3 +1,5 @@
+package org.wit.placemark.activities
+
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
