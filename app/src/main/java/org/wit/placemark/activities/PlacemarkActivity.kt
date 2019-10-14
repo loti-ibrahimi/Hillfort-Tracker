@@ -40,6 +40,7 @@ class PlacemarkActivity : AppCompatActivity(), AnkoLogger {
             placemarkTitle.setText(placemark.title)
             placemarkDescription.setText(placemark.description)
             placemarkImage.setImageBitmap(readImageFromPath(this, placemark.image))
+            chooseImage.setText(R.string.button_changeImage)
             btnAdd.setText(R.string.save_placemark)
         }
 
