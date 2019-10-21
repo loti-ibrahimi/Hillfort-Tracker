@@ -6,10 +6,7 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import kotlinx.android.synthetic.main.activity_placemark.*
-import org.jetbrains.anko.AnkoLogger
-import org.jetbrains.anko.info
-import org.jetbrains.anko.intentFor
-import org.jetbrains.anko.toast
+import org.jetbrains.anko.*
 import org.wit.placemark.MapActivity
 import org.wit.placemark.R
 import org.wit.placemark.helpers.readImage
@@ -25,6 +22,8 @@ class PlacemarkActivity : AppCompatActivity(), AnkoLogger {
     // lateint qualifier | Reference to MainApp object:
     lateinit var app: MainApp
     val IMAGE_REQUEST = 1
+    val LOCATION_REQUEST = 2
+    var location = Location(52.245696, -7.139102, 15f)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -71,8 +70,7 @@ class PlacemarkActivity : AppCompatActivity(), AnkoLogger {
         }
 
         placemarkLocation.setOnClickListener {
-            val location = Location(52.245696, -7.139102, 15f)
-            startActivity (intentFor<MapActivity>().putExtra("location", location))
+            startActivityForResult (intentFor<MapActivity>().putExtra("location", location), LOCATION_REQUEST)
             info ("Set Location Pressed")
         }
     }
@@ -98,6 +96,12 @@ class PlacemarkActivity : AppCompatActivity(), AnkoLogger {
                 if (data != null) {
                     placemark.image = data.getData().toString()
                     placemarkImage.setImageBitmap(readImage(this, resultCode, data))
+                    chooseImage.setText(R.string.button_changeImage)
+                }
+            }
+            LOCATION_REQUEST -> {
+                if (data != null) {
+                    location = data.extras?.getParcelable<Location>("location")!!
                 }
             }
         }
