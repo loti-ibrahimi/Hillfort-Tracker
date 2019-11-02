@@ -23,7 +23,6 @@ class PlacemarkActivity : AppCompatActivity(), AnkoLogger {
     lateinit var app: MainApp
     val IMAGE_REQUEST = 1
     val LOCATION_REQUEST = 2
-//    var location = Location(52.245696, -7.139102, 15f)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -50,7 +49,7 @@ class PlacemarkActivity : AppCompatActivity(), AnkoLogger {
             placemark.title = placemarkTitle.text.toString()
             placemark.description = placemarkDescription.text.toString()
             // 'Create' OR 'Save' method of PlacemarkMemStore via MainApp object being used.
-            if(placemark.title.isEmpty() && placemark.description.isEmpty()) {
+            if (placemark.title.isEmpty() && placemark.description.isEmpty()) {
                 toast(R.string.enter_placemark_title)
             } else {
                 if (edit) {
@@ -89,6 +88,10 @@ class PlacemarkActivity : AppCompatActivity(), AnkoLogger {
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         when (item?.itemId) {
             R.id.item_cancel -> {
+                finish()
+            }
+            R.id.item_delete -> {
+                app.placemarks.delete(placemark)
                 finish()
             }
         }
