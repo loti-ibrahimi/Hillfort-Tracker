@@ -5,14 +5,13 @@ import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import com.google.gson.reflect.TypeToken
 import org.jetbrains.anko.AnkoLogger
+import org.jetbrains.anko.info
 import org.wit.placemark.helpers.*
 import java.util.*
 
 // File Name
 val JSON_FILE = "placemarks.json"
-// Utility to serialize java class
 val gsonBuilder = GsonBuilder().setPrettyPrinting().create()
-// OBject to help recognize PlacemarkModels along the way
 val listType = object : TypeToken<java.util.ArrayList<PlacemarkModel>>() {}.type
 
 fun generateRandomId(): Long {
@@ -43,7 +42,22 @@ class PlacemarkJSONStore : PlacemarkStore, AnkoLogger {
 
 
     override fun update(placemark: PlacemarkModel) {
-        // todo
+        var foundPlacemark: PlacemarkModel? = placemarks.find { p -> p.id == placemark.id }
+
+        if (foundPlacemark != null) {
+            foundPlacemark.title = placemark.title
+            foundPlacemark.description = placemark.description
+            foundPlacemark.image = placemark.image
+            foundPlacemark.lat = placemark.lat
+            foundPlacemark.lng = placemark.lng
+            foundPlacemark.zoom = placemark.zoom
+            logAll()
+            serialize()
+        }
+    }
+
+    fun logAll() {
+        placemarks.forEach{ info("${it}") }
     }
 
     private fun serialize() {
