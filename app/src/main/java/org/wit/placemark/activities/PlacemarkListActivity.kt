@@ -5,12 +5,10 @@ import android.os.Bundle
 import android.view.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
-import kotlinx.android.synthetic.main.activity_placemark.*
 import kotlinx.android.synthetic.main.activity_placemark_list.*
 import org.jetbrains.anko.intentFor
 import org.jetbrains.anko.startActivityForResult
 import org.wit.placemark.R
-import org.wit.placemark.helpers.readImage
 import org.wit.placemark.main.MainApp
 import org.wit.placemark.models.PlacemarkModel
 
@@ -24,12 +22,22 @@ class PlacemarkListActivity : AppCompatActivity(), PlacemarkListener {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_placemark_list)
         app = application as MainApp
+
         toolbar.title = title
         setSupportActionBar(toolbar)
 
         val layoutManager = LinearLayoutManager(this)
         recyclerView.layoutManager = layoutManager
-        recyclerView.adapter = PlacemarkAdapter(app.placemarks.findAll(), this)
+        loadPlacemarks()
+    }
+
+    private fun loadPlacemarks() {
+        showPlacemarks(app.placemarks.findAll())
+    }
+
+    fun showPlacemarks (placemarks: List<PlacemarkModel>) {
+        recyclerView.adapter = PlacemarkAdapter(placemarks, this)
+        recyclerView.adapter?.notifyDataSetChanged()
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -48,21 +56,8 @@ class PlacemarkListActivity : AppCompatActivity(), PlacemarkListener {
         startActivityForResult(intentFor<PlacemarkActivity>().putExtra("placemark_edit", placemark), 0)
     }
 
-//    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-//        recyclerView.adapter?.notifyDataSetChanged()
-//        super.onActivityResult(requestCode, resultCode, data)
-//    }
-
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        recyclerView.adapter?.notifyDataSetChanged()
+        loadPlacemarks()
         super.onActivityResult(requestCode, resultCode, data)
-        when (requestCode) {
-            IMAGE_REQUEST -> {
-                if (data != null) {
-                    placemark.image = data.getData().toString()
-                    placemarkImage.setImageBitmap(readImage(this, resultCode, data))
-                }
-            }
-        }
     }
 }
