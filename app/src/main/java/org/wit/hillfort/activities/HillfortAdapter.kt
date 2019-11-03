@@ -5,6 +5,10 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.card_hillfort.view.*
+import kotlinx.android.synthetic.main.card_hillfort.view.hillfortImage
+import kotlinx.android.synthetic.main.card_hillfort.view.hillfortTitle
+import kotlinx.android.synthetic.main.card_hillfort.view.hillfortVisited
+import kotlinx.android.synthetic.main.card_hillfort.view.additionalNotes
 import org.wit.hillfort.R
 import org.wit.hillfort.helpers.readImageFromPath
 import org.wit.hillfort.models.HillfortModel
@@ -42,6 +46,7 @@ class HillfortAdapter constructor(
             itemView.description.text = hillfort.description
             itemView.hillfortImage.setImageBitmap(readImageFromPath(itemView.context, hillfort.image))
             itemView.hillfortVisited.isChecked = hillfort.visited
+            itemView.additionalNotes.text = hillfort.notes
             itemView.setOnClickListener { listener.onHillfortClick(hillfort) }
         }
     }

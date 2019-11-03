@@ -34,7 +34,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/hillfortTitle"
-            android:layout_toEndOf="@+id/hillfortTitle" />
+            android:layout_toEndOf="@+id/hillfortImage" />
 
         <CheckBox
             android:id="@+id/hillfortVisited"
@@ -44,6 +44,25 @@
             android:layout_marginTop="10dp"
             android:clickable="false"
             android:text="@string/hint_hillfortVisited" />
+
+        <TextView
+            android:id="@+id/additionalNotesTitle"
+            android:text="Additional Notes:"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/hillfortVisited"/>
+
+
+        <TextView
+            android:id="@+id/additionalNotes"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:layout_below="@id/additionalNotesTitle"
+            android:padding="8dp"
+            android:textColor="@color/colorPrimaryDark"
+            android:background="#ffffed"
+            android:textSize="14sp" />
 
     </RelativeLayout>
 </androidx.cardview.widget.CardView>

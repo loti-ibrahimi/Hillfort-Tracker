@@ -42,12 +42,14 @@ class HillfortActivity : AppCompatActivity(), AnkoLogger {
             hillfortImage.setImageBitmap(readImageFromPath(this, hillfort.image))
             chooseImage.setText(R.string.button_changeImage)
             hillfortVisited.isChecked = hillfort.visited
+            additionalNotes.setText(hillfort.notes)
             btnAdd.setText(R.string.save_hillfort)
         }
 
         btnAdd.setOnClickListener() {
             hillfort.title = hillfortTitle.text.toString()
             hillfort.description = hillfortDescription.text.toString()
+            hillfort.notes = additionalNotes.text.toString()
             // 'Create' OR 'Save' method of HillfortMemStore via MainApp object being used.
             if (hillfort.title.isEmpty() && hillfort.description.isEmpty()) {
                 toast(R.string.enter_hillfort_title)
