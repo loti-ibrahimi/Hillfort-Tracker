@@ -3,9 +3,7 @@ package org.wit.placemark.activities
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
-import kotlinx.android.synthetic.main.activity_splash.*
 import org.jetbrains.anko.intentFor
-import org.jetbrains.anko.startActivity
 import org.wit.placemark.R
 
 // 4 second splash screen
