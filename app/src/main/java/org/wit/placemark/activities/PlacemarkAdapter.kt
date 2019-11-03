@@ -41,6 +41,7 @@ class PlacemarkAdapter constructor(
             itemView.placemarkTitle.text = placemark.title
             itemView.description.text = placemark.description
             itemView.placemarkImage.setImageBitmap(readImageFromPath(itemView.context, placemark.image))
+            itemView.placemarkVisited.isChecked = placemark.visited
             itemView.setOnClickListener { listener.onPlacemarkClick(placemark) }
         }
     }

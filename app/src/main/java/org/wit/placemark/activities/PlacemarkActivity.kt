@@ -42,6 +42,7 @@ class PlacemarkActivity : AppCompatActivity(), AnkoLogger {
             placemarkDescription.setText(placemark.description)
             placemarkImage.setImageBitmap(readImageFromPath(this, placemark.image))
             chooseImage.setText(R.string.button_changeImage)
+            placemarkVisited.isChecked = placemark.visited
             btnAdd.setText(R.string.save_placemark)
         }
 
@@ -66,6 +67,13 @@ class PlacemarkActivity : AppCompatActivity(), AnkoLogger {
         chooseImage.setOnClickListener {
             showImagePicker(this, IMAGE_REQUEST)
             info ("Select image")
+        }
+
+        // Function for hillfort visited check box
+        placemarkVisited.setOnClickListener{
+
+            // Set visited value to be the value of the checkbox
+            placemark.visited = placemarkVisited.isChecked.toString().toBoolean()
         }
 
         placemarkLocation.setOnClickListener {
