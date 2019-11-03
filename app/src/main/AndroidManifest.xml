@@ -21,7 +21,8 @@
             android:name=".MapActivity"
             android:label="@string/title_activity_map"></activity>
         <activity android:name=".activities.PlacemarkActivity"></activity>
-        <activity android:name=".activities.PlacemarkListActivity">
+        <activity android:name=".activities.PlacemarkListActivity"></activity>
+        <activity android:name=".activities.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
