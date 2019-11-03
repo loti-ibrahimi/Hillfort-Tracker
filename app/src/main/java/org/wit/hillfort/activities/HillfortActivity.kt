@@ -46,6 +46,7 @@ class HillfortActivity : AppCompatActivity(), AnkoLogger {
             btnAdd.setText(R.string.save_hillfort)
         }
 
+        // Function to add/save a Hillfort
         btnAdd.setOnClickListener() {
             hillfort.title = hillfortTitle.text.toString()
             hillfort.description = hillfortDescription.text.toString()
@@ -65,6 +66,7 @@ class HillfortActivity : AppCompatActivity(), AnkoLogger {
             finish()
         }
 
+        // Function for select image
         chooseImage.setOnClickListener {
             showImagePicker(this, IMAGE_REQUEST)
             info ("Select image")
