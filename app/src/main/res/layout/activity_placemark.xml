@@ -89,6 +89,18 @@
                     android:text="@string/button_location"
                     android:textSize="16sp"/>
 
+                <CheckBox
+                    android:id="@+id/placemarkVisited"
+                    android:layout_width="match_parent"
+                    android:layout_height="45dp"
+                    android:layout_margin="8dp"
+                    android:maxLength="25"
+                    android:maxLines="1"
+                    android:padding="8dp"
+                    android:text="@string/hint_placemarkVisited"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textSize="14sp" />
+
                 <Button
                     android:id="@+id/btnAdd"
                     android:layout_width="match_parent"
