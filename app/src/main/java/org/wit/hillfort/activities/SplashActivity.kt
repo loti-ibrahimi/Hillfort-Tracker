@@ -1,10 +1,10 @@
-package org.wit.placemark.activities
+package org.wit.hillfort.activities
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import org.jetbrains.anko.intentFor
-import org.wit.placemark.R
+import org.wit.hillfort.R
 
 // 4 second splash screen
 class SplashActivity : AppCompatActivity() {
@@ -16,7 +16,7 @@ class SplashActivity : AppCompatActivity() {
         setContentView(R.layout.activity_splash)
 
         Handler().postDelayed({
-            startActivity(intentFor<PlacemarkListActivity>())
+            startActivity(intentFor<HillfortListActivity>())
             finish()
         }, SPLASH_TIME_OUT)
     }

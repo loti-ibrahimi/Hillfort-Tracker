@@ -1,24 +1,24 @@
-package org.wit.placemark.activities
+package org.wit.hillfort.activities
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
-import kotlinx.android.synthetic.main.activity_placemark.*
+import kotlinx.android.synthetic.main.activity_hillfort.*
 import org.jetbrains.anko.*
-import org.wit.placemark.MapActivity
-import org.wit.placemark.R
-import org.wit.placemark.helpers.readImage
-import org.wit.placemark.helpers.readImageFromPath
-import org.wit.placemark.helpers.showImagePicker
-import org.wit.placemark.main.MainApp
-import org.wit.placemark.models.Location
-import org.wit.placemark.models.PlacemarkModel
+import org.wit.hillfort.MapActivity
+import org.wit.hillfort.R
+import org.wit.hillfort.helpers.readImage
+import org.wit.hillfort.helpers.readImageFromPath
+import org.wit.hillfort.helpers.showImagePicker
+import org.wit.hillfort.main.MainApp
+import org.wit.hillfort.models.Location
+import org.wit.hillfort.models.HillfortModel
 
-class PlacemarkActivity : AppCompatActivity(), AnkoLogger {
+class HillfortActivity : AppCompatActivity(), AnkoLogger {
 
-    var placemark = PlacemarkModel()
+    var hillfort = HillfortModel()
     // lateint qualifier | Reference to MainApp object:
     lateinit var app: MainApp
     val IMAGE_REQUEST = 1
@@ -26,40 +26,40 @@ class PlacemarkActivity : AppCompatActivity(), AnkoLogger {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_placemark)
+        setContentView(R.layout.activity_hillfort)
         toolbarAdd.title = title
         setSupportActionBar(toolbarAdd)
-        info("Placemark Activity started..")
+        info("Hillfort Activity started..")
 
         // Initialisation of MainApp object.
         app = application as MainApp
         var edit = false
 
-        if (intent.hasExtra("placemark_edit")) {
+        if (intent.hasExtra("hillfort_edit")) {
             edit = true
-            placemark = intent.extras?.getParcelable<PlacemarkModel>("placemark_edit")!!
-            placemarkTitle.setText(placemark.title)
-            placemarkDescription.setText(placemark.description)
-            placemarkImage.setImageBitmap(readImageFromPath(this, placemark.image))
+            hillfort = intent.extras?.getParcelable<HillfortModel>("hillfort_edit")!!
+            hillfortTitle.setText(hillfort.title)
+            hillfortDescription.setText(hillfort.description)
+            hillfortImage.setImageBitmap(readImageFromPath(this, hillfort.image))
             chooseImage.setText(R.string.button_changeImage)
-            placemarkVisited.isChecked = placemark.visited
-            btnAdd.setText(R.string.save_placemark)
+            hillfortVisited.isChecked = hillfort.visited
+            btnAdd.setText(R.string.save_hillfort)
         }
 
         btnAdd.setOnClickListener() {
-            placemark.title = placemarkTitle.text.toString()
-            placemark.description = placemarkDescription.text.toString()
-            // 'Create' OR 'Save' method of PlacemarkMemStore via MainApp object being used.
-            if (placemark.title.isEmpty() && placemark.description.isEmpty()) {
-                toast(R.string.enter_placemark_title)
+            hillfort.title = hillfortTitle.text.toString()
+            hillfort.description = hillfortDescription.text.toString()
+            // 'Create' OR 'Save' method of HillfortMemStore via MainApp object being used.
+            if (hillfort.title.isEmpty() && hillfort.description.isEmpty()) {
+                toast(R.string.enter_hillfort_title)
             } else {
                 if (edit) {
-                    app.placemarks.update(placemark.copy())
+                    app.hillforts.update(hillfort.copy())
                 } else {
-                    app.placemarks.create(placemark.copy())
+                    app.hillforts.create(hillfort.copy())
                 }
             }
-            info("[Add] Button Pressed: ${placemark}")
+            info("[Add] Button Pressed: ${hillfort}")
             setResult(AppCompatActivity.RESULT_OK)
             finish()
         }
@@ -70,18 +70,18 @@ class PlacemarkActivity : AppCompatActivity(), AnkoLogger {
         }
 
         // Function for hillfort visited check box
-        placemarkVisited.setOnClickListener{
+        hillfortVisited.setOnClickListener{
 
             // Set visited value to be the value of the checkbox
-            placemark.visited = placemarkVisited.isChecked.toString().toBoolean()
+            hillfort.visited = hillfortVisited.isChecked.toString().toBoolean()
         }
 
-        placemarkLocation.setOnClickListener {
+        hillfortLocation.setOnClickListener {
             val location = Location(52.245696, -7.139102, 15f)
-            if (placemark.zoom != 0f){
-                location.lat =  placemark.lat
-                location.lng = placemark.lng
-                location.zoom = placemark.zoom
+            if (hillfort.zoom != 0f){
+                location.lat =  hillfort.lat
+                location.lng = hillfort.lng
+                location.zoom = hillfort.zoom
             }
             startActivityForResult (intentFor<MapActivity>().putExtra("location", location), LOCATION_REQUEST)
             info ("Set Location Pressed")
@@ -89,7 +89,7 @@ class PlacemarkActivity : AppCompatActivity(), AnkoLogger {
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menuInflater.inflate(R.menu.menu_placemark, menu)
+        menuInflater.inflate(R.menu.menu_hillfort, menu)
         return super.onCreateOptionsMenu(menu)
     }
 
@@ -99,7 +99,7 @@ class PlacemarkActivity : AppCompatActivity(), AnkoLogger {
                 finish()
             }
             R.id.item_delete -> {
-                app.placemarks.delete(placemark)
+                app.hillforts.delete(hillfort)
                 finish()
             }
         }
@@ -111,17 +111,17 @@ class PlacemarkActivity : AppCompatActivity(), AnkoLogger {
         when (requestCode) {
             IMAGE_REQUEST -> {
                 if (data != null) {
-                    placemark.image = data.getData().toString()
-                    placemarkImage.setImageBitmap(readImage(this, resultCode, data))
+                    hillfort.image = data.getData().toString()
+                    hillfortImage.setImageBitmap(readImage(this, resultCode, data))
                     chooseImage.setText(R.string.button_changeImage)
                 }
             }
             LOCATION_REQUEST -> {
                 if (data != null) {
                     val location = data.extras?.getParcelable<Location>("location")!!
-                    placemark.lat = location.lat
-                    placemark.lng = location.lng
-                    placemark.zoom = location.zoom
+                    hillfort.lat = location.lat
+                    hillfort.lng = location.lng
+                    hillfort.zoom = location.zoom
                 }
             }
         }

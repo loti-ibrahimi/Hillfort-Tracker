@@ -1,4 +1,4 @@
-package org.wit.placemark.models
+package org.wit.hillfort.models
 
 import android.content.Context
 import com.google.gson.Gson
@@ -6,7 +6,7 @@ import com.google.gson.GsonBuilder
 import com.google.gson.reflect.TypeToken
 import org.jetbrains.anko.AnkoLogger
 import org.jetbrains.anko.info
-import org.wit.placemark.helpers.*
+import org.wit.hillfort.helpers.*
 import java.util.*
 
 // File Name
