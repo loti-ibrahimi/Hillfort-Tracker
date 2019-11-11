@@ -6,7 +6,7 @@
     <string name="hint_hillfortVisited">Visited</string>
     <string name="hint_hillfortNotes">Additional Notes</string>
     <string name="button_addHillfort">Add Hillfort</string>
-    <string name="menu_addPlacemark">Add</string>
+    <string name="menu_addHillfort">Add</string>
     <string name="save_hillfort"> Save Hillfort </string>
     <string name="menu_cancelHillfort">Cancel</string>
     <string name="menu_deleteHillfort">Delete</string>
