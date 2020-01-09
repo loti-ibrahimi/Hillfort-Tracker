@@ -13,7 +13,7 @@ import kotlinx.android.synthetic.main.content_hillfort_maps.*
 import org.wit.hillfort.helpers.readImageFromPath
 import org.wit.hillfort.main.MainApp
 
-class HillfortMapsActivity : AppCompatActivity(), GoogleMap.OnMarkerClickListener {
+class HillfortMapView : AppCompatActivity(), GoogleMap.OnMarkerClickListener {
 
     lateinit var map: GoogleMap
     lateinit var app: MainApp

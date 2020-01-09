@@ -11,7 +11,7 @@ import org.wit.hillfort.R
 import org.wit.hillfort.helpers.readImageFromPath
 import org.wit.hillfort.models.HillfortModel
 
-class HillfortActivity : AppCompatActivity(), AnkoLogger {
+class HillfortView : AppCompatActivity(), AnkoLogger {
 
     var hillfort = HillfortModel()
     // lateint qualifier | Reference to MainApp object:

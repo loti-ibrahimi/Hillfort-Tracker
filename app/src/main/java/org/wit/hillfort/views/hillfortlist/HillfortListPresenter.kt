@@ -6,7 +6,7 @@ import org.jetbrains.anko.startActivityForResult
 import org.wit.hillfort.main.MainApp
 import org.wit.hillfort.models.HillfortModel
 
-class HillfortListPresenter(val view: HillfortListActivity) {
+class HillfortListPresenter(val view: HillfortListView) {
 
     var app: MainApp
 
@@ -17,14 +17,14 @@ class HillfortListPresenter(val view: HillfortListActivity) {
     fun getHillforts() = app.hillforts.findAll()
 
     fun doAddHillfort() {
-        view.startActivityForResult<HillfortActivity>(0)
+        view.startActivityForResult<HillfortView>(0)
     }
 
     fun doEditHillfort(hillfort: HillfortModel) {
-        view.startActivityForResult(view.intentFor<HillfortActivity>().putExtra("hillfort_edit", hillfort), 0)
+        view.startActivityForResult(view.intentFor<HillfortView>().putExtra("hillfort_edit", hillfort), 0)
     }
 
     fun doShowPlacemarksMap() {
-        view.startActivity<HillfortMapsActivity>()
+        view.startActivity<HillfortMapsView>()
     }
 }

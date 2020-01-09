@@ -9,7 +9,7 @@ import kotlinx.android.synthetic.main.activity_hillfort_list.*
 import org.wit.hillfort.R
 import org.wit.hillfort.models.HillfortModel
 
-class HillfortListActivity : AppCompatActivity(), HillfortListener {
+class HillfortListView : AppCompatActivity(), HillfortListener {
 
     lateinit var presenter: HillfortListPresenter
 
