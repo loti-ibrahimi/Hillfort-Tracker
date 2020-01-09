@@ -1,4 +1,4 @@
-package org.wit.hillfort.activities
+package org.wit.hillfort.views.hillfort
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity

@@ -1,4 +1,4 @@
-package org.wit.hillfort.activities
+package org.wit.hillfort.views.hillfortlist
 
 import android.content.Intent
 import android.os.Bundle
@@ -22,7 +22,8 @@ class HillfortListView : AppCompatActivity(), HillfortListener {
         presenter = HillfortListPresenter(this)
         val layoutManager = LinearLayoutManager(this)
         recyclerView.layoutManager = layoutManager
-        recyclerView.adapter = HillfortAdapter(presenter.getHillforts(), this)
+        recyclerView.adapter =
+            HillfortAdapter(presenter.getHillforts(), this)
         recyclerView.adapter?.notifyDataSetChanged()
     }
 

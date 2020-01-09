@@ -1,4 +1,4 @@
-package org.wit.hillfort.activities
+package org.wit.hillfort.views.hillfort
 
 import android.content.Intent
 import org.jetbrains.anko.intentFor
@@ -6,6 +6,7 @@ import org.wit.hillfort.helpers.showImagePicker
 import org.wit.hillfort.main.MainApp
 import org.wit.hillfort.models.Location
 import org.wit.hillfort.models.HillfortModel
+import org.wit.hillfort.views.editlocation.EditLocationView
 
 class HillfortPresenter(val view: HillfortView) {
 
