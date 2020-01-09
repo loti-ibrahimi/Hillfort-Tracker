@@ -8,21 +8,14 @@ import android.view.MenuItem
 import kotlinx.android.synthetic.main.activity_hillfort.*
 import org.jetbrains.anko.*
 import org.wit.hillfort.R
-import org.wit.hillfort.helpers.readImage
 import org.wit.hillfort.helpers.readImageFromPath
-import org.wit.hillfort.helpers.showImagePicker
-import org.wit.hillfort.main.MainApp
-import org.wit.hillfort.models.Location
 import org.wit.hillfort.models.HillfortModel
 
 class HillfortActivity : AppCompatActivity(), AnkoLogger {
 
     var hillfort = HillfortModel()
     // lateint qualifier | Reference to MainApp object:
-    lateinit var app: MainApp
-    val IMAGE_REQUEST = 1
-    val LOCATION_REQUEST = 2
-    var edit = false;
+    lateinit var presenter: HillfortPresenter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,45 +24,21 @@ class HillfortActivity : AppCompatActivity(), AnkoLogger {
         setSupportActionBar(toolbarAdd)
         info("Hillfort Activity started..")
 
-        // Initialisation of MainApp object.
-        app = application as MainApp
-
-        if (intent.hasExtra("hillfort_edit")) {
-            edit = true
-            hillfort = intent.extras?.getParcelable<HillfortModel>("hillfort_edit")!!
-            hillfortTitle.setText(hillfort.title)
-            hillfortDescription.setText(hillfort.description)
-            hillfortImage.setImageBitmap(readImageFromPath(this, hillfort.image))
-            chooseImage.setText(R.string.button_changeImage)
-            hillfortVisited.isChecked = hillfort.visited
-            additionalNotes.setText(hillfort.notes)
-            btnAdd.setText(R.string.save_hillfort)
-        }
+        presenter = HillfortPresenter(this)
 
         // Function to add/save a Hillfort
         btnAdd.setOnClickListener() {
-            hillfort.title = hillfortTitle.text.toString()
-            hillfort.description = hillfortDescription.text.toString()
-            hillfort.notes = additionalNotes.text.toString()
             // 'Create' OR 'Save' method of HillfortMemStore via MainApp object being used.
-            if (hillfort.title.isEmpty() && hillfort.description.isEmpty()) {
+            if (hillfortTitle.text.toString().isEmpty()) {
                 toast(R.string.enter_hillfort_title)
             } else {
-                if (edit) {
-                    app.hillforts.update(hillfort.copy())
-                } else {
-                    app.hillforts.create(hillfort.copy())
-                }
+                presenter.doAddOrSave(hillfortTitle.text.toString(), hillfortDescription.text.toString())
             }
-            info("[Add] Button Pressed: ${hillfort}")
-            setResult(AppCompatActivity.RESULT_OK)
-            finish()
         }
 
-        // Function for select image
+        // Function for select image - body called from presenter class
         chooseImage.setOnClickListener {
-            showImagePicker(this, IMAGE_REQUEST)
-            info ("Select image")
+            presenter.doSelectImage()
         }
 
         // Function for hillfort visited check box
@@ -80,31 +49,33 @@ class HillfortActivity : AppCompatActivity(), AnkoLogger {
         }
 
         hillfortLocation.setOnClickListener {
-            val location = Location(52.245696, -7.139102, 15f)
-            if (hillfort.zoom != 0f){
-                location.lat =  hillfort.lat
-                location.lng = hillfort.lng
-                location.zoom = hillfort.zoom
-            }
-            startActivityForResult (intentFor<MapActivity>().putExtra("location", location), LOCATION_REQUEST)
-            info ("Set Location Pressed")
+            presenter.doSetLocation()
         }
+    }
+
+    fun showHillfort(hillfort: HillfortModel) {
+        hillfortTitle.setText(hillfort.title)
+        hillfortDescription.setText(hillfort.description)
+        hillfortImage.setImageBitmap(readImageFromPath(this, hillfort.image))
+        if (hillfort.image != null) {
+            chooseImage.setText(R.string.button_changeImage)
+        }
+        btnAdd.setText(R.string.save_hillfort)
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.menu_hillfort, menu)
-        if(edit && menu !=  null) menu.getItem(0).setVisible(true)
+        if(presenter.edit) menu?.getItem(0)?.setVisible(true)
         return super.onCreateOptionsMenu(menu)
     }
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         when (item?.itemId) {
             R.id.item_cancel -> {
-                finish()
+                presenter.doCancel()
             }
             R.id.item_delete -> {
-                app.hillforts.delete(hillfort)
-                finish()
+                presenter.doDelete()
             }
         }
         return super.onOptionsItemSelected(item)
@@ -112,22 +83,8 @@ class HillfortActivity : AppCompatActivity(), AnkoLogger {
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        when (requestCode) {
-            IMAGE_REQUEST -> {
-                if (data != null) {
-                    hillfort.image = data.getData().toString()
-                    hillfortImage.setImageBitmap(readImage(this, resultCode, data))
-                    chooseImage.setText(R.string.button_changeImage)
-                }
-            }
-            LOCATION_REQUEST -> {
-                if (data != null) {
-                    val location = data.extras?.getParcelable<Location>("location")!!
-                    hillfort.lat = location.lat
-                    hillfort.lng = location.lng
-                    hillfort.zoom = location.zoom
-                }
-            }
+        if (data != null) {
+            presenter.doActivityResult(requestCode, resultCode, data)
         }
     }
 }
