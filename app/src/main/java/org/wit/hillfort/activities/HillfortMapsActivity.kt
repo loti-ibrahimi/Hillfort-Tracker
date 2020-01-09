@@ -10,6 +10,7 @@ import com.google.android.gms.maps.model.MarkerOptions
 import org.wit.hillfort.R
 import kotlinx.android.synthetic.main.activity_hillfort_maps.*
 import kotlinx.android.synthetic.main.content_hillfort_maps.*
+import org.wit.hillfort.helpers.readImageFromPath
 import org.wit.hillfort.main.MainApp
 
 class HillfortMapsActivity : AppCompatActivity(), GoogleMap.OnMarkerClickListener {
@@ -30,8 +31,12 @@ class HillfortMapsActivity : AppCompatActivity(), GoogleMap.OnMarkerClickListene
     }
 
     override fun onMarkerClick(marker: Marker): Boolean {
-        currentTitle.text = marker.title
-        return false
+        val tag = marker.tag as Long
+        val hillfort = app.hillforts.findById(tag)
+        currentTitle.text = hillfort!!.title
+        currentDescription.text = hillfort!!.description
+        currentImage.setImageBitmap(readImageFromPath(this, hillfort.image))
+        return true
     }
 
     fun configureMap() {
@@ -39,6 +44,7 @@ class HillfortMapsActivity : AppCompatActivity(), GoogleMap.OnMarkerClickListene
         app.hillforts.findAll().forEach {
             val loc = LatLng(it.lat, it.lng)
             val options = MarkerOptions().title(it.title).position(loc)
+            // Add marker to map & 'Tag' marker with ID of the hillfort
             map.addMarker(options).tag = it.id
             map.setOnMarkerClickListener(this)
             map.moveCamera(CameraUpdateFactory.newLatLngZoom(loc, it.zoom))
