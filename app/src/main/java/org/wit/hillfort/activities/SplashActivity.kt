@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.os.Handler
 import org.jetbrains.anko.intentFor
 import org.wit.hillfort.R
+import org.wit.hillfort.views.hillfortlist.HillfortListView
 
 // 4 second splash screen
 class SplashActivity : AppCompatActivity() {
@@ -16,7 +17,7 @@ class SplashActivity : AppCompatActivity() {
         setContentView(R.layout.activity_splash)
 
         Handler().postDelayed({
-            startActivity(intentFor<HillfortListActivity>())
+            startActivity(intentFor<HillfortListView>())
             finish()
         }, SPLASH_TIME_OUT)
     }
