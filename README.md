@@ -14,12 +14,12 @@ Hillfort Tracker stores a collection of different hillfort records, allowing the
 * Additional Notes
 
 
-Once a hillfort is created it is visible on the main Hillforts list page (activity), in a card format. 
+Once a hillfort is created it is visible on the main Hillforts list page (View), in a card format. 
 The card will display the information above.
 
 Hillforts can be edited by clicking the Hillfort card itself. 
 The Hillfort itself can be removed from within the edit page via the 'delete' option.
-A 'cancel' option is also available to cancel any changes & return to Hillfort list page. 
+To 'Cancel' any action or changes, press phone [back] button. 
 
 
 
