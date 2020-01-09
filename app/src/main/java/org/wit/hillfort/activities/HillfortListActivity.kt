@@ -15,20 +15,18 @@ import org.wit.hillfort.models.HillfortModel
 
 class HillfortListActivity : AppCompatActivity(), HillfortListener {
 
-    var hillfort = HillfortModel()
     lateinit var app: MainApp
-    val IMAGE_REQUEST = 1
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_hillfort_list)
         app = application as MainApp
-
         toolbar.title = title
         setSupportActionBar(toolbar)
 
         val layoutManager = LinearLayoutManager(this)
         recyclerView.layoutManager = layoutManager
+        recyclerView.adapter = HillfortAdapter(app.hillforts.findAll(), this)
         loadHillforts()
     }
 
@@ -48,7 +46,7 @@ class HillfortListActivity : AppCompatActivity(), HillfortListener {
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         when (item?.itemId) {
-            R.id.item_add -> startActivityForResult<HillfortActivity>(0)
+            R.id.item_add -> startActivityForResult<HillfortActivity>(200)
             R.id.item_map -> startActivity<HillfortMapsActivity>()
         }
         return super.onOptionsItemSelected(item)
