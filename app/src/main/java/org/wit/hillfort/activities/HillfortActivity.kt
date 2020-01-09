@@ -22,6 +22,7 @@ class HillfortActivity : AppCompatActivity(), AnkoLogger {
     lateinit var app: MainApp
     val IMAGE_REQUEST = 1
     val LOCATION_REQUEST = 2
+    var edit = false;
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,7 +33,6 @@ class HillfortActivity : AppCompatActivity(), AnkoLogger {
 
         // Initialisation of MainApp object.
         app = application as MainApp
-        var edit = false
 
         if (intent.hasExtra("hillfort_edit")) {
             edit = true
@@ -93,6 +93,7 @@ class HillfortActivity : AppCompatActivity(), AnkoLogger {
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.menu_hillfort, menu)
+        if(edit && menu !=  null) menu.getItem(0).setVisible(true)
         return super.onCreateOptionsMenu(menu)
     }
 
