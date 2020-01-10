@@ -44,6 +44,8 @@ class HillfortView : BaseView(), AnkoLogger {
         hillfortImage.setImageBitmap(readImageFromPath(this, hillfort.image))
         if (hillfort.image != null) {
             chooseImage.setText(R.string.button_changeImage)
+        } else {
+            chooseImage.setText(R.string.button_addImage)
         }
         lat.setText("%.6f".format(hillfort.lat))
         lng.setText("%.6f".format(hillfort.lng))
