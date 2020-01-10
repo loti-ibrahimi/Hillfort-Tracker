@@ -1,7 +1,9 @@
-package org.wit.hillfort.models
+package org.wit.hillfort.models.mem
 
 import org.jetbrains.anko.AnkoLogger
 import org.jetbrains.anko.info
+import org.wit.hillfort.models.HillfortModel
+import org.wit.hillfort.models.HillfortStore
 
 var lastId = 0L
 
@@ -36,9 +38,7 @@ class HillfortMemStore : HillfortStore, AnkoLogger {
             foundHillfort.image = hillfort.image
             foundHillfort.visited = hillfort.visited
             foundHillfort.notes = hillfort.notes
-            foundHillfort.lat = hillfort.lat
-            foundHillfort.lng = hillfort.lng
-            foundHillfort.zoom = hillfort.zoom
+            foundHillfort.location = hillfort.location
             logAll();
         }
     }

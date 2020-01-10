@@ -48,7 +48,7 @@ class HillfortListView : BaseView(), HillfortListener {
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        recyclerView.adapter?.notifyDataSetChanged()
+        presenter.loadHillforts()
         super.onActivityResult(requestCode, resultCode, data)
     }
 }
