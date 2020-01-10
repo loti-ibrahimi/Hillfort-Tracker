@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "627789717715",
+    "firebase_url": "https://hillforttracker.firebaseio.com",
+    "project_id": "hillforttracker",
+    "storage_bucket": "hillforttracker.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:627789717715:android:ec4e56d7cbac7abe12b426",
+        "android_client_info": {
+          "package_name": "org.wit.hillfort"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "627789717715-plqcirund3hhg2geagp2pqe7b5vkeaa9.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "org.wit.hillfort",
+            "certificate_hash": "45fc9b101f2fa3f9393a17dbb3388d7b2c6a12e0"
+          }
+        },
+        {
+          "client_id": "627789717715-88ee5u19t7lge5f0t1jfldi51ftt508m.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAxP6P7tbg9G5UM_anBaqBUj-pmWy_R9DQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "627789717715-88ee5u19t7lge5f0t1jfldi51ftt508m.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
