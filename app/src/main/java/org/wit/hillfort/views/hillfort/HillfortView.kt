@@ -30,14 +30,10 @@ class HillfortView : BaseView(), AnkoLogger {
             presenter.doSelectImage()
         }
 
-        hillfortLocation.setOnClickListener {
-            presenter.doSetLocation()
-        }
-
         mapView.onCreate(savedInstanceState);
         mapView.getMapAsync {
-            map = it
-            presenter.doConfigureMap(map)
+            presenter.doConfigureMap(it)
+            it.setOnMapClickListener { presenter.doSetLocation() }
         }
     }
 
@@ -49,6 +45,8 @@ class HillfortView : BaseView(), AnkoLogger {
         if (hillfort.image != null) {
             chooseImage.setText(R.string.button_changeImage)
         }
+        lat.setText("%.6f".format(hillfort.lat))
+        lng.setText("%.6f".format(hillfort.lng))
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
