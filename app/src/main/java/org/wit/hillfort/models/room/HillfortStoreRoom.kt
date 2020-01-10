@@ -35,4 +35,7 @@ class HillfortStoreRoom(val context: Context) : HillfortStore {
     override fun delete(hillfort: HillfortModel) {
         dao.delete(hillfort)
     }
+
+    override fun clear() {
+    }
 }
