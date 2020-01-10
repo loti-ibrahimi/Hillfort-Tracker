@@ -3,23 +3,11 @@ Mobile App Dev CA | Hillfort tracker app: Track Hillforts across Ireland.
 
 # Overview
 
-A splash screen is displayed when the app is selected, after which you are brought to the Hillfort list page. 
+A splash screen is displayed when the app is selected, after which you are brought to a login/signup screen. Firebase was used to assist with user authentication database storage for the app.
 
-Hillfort Tracker stores a collection of different hillfort records, allowing the gathering of the following information:
-* Hillfort Title
-* Hillfort Description
-* Add an image
-* Set location of Hillfort (using google maps)
-* Checkbox if 'visited'
-* Additional Notes
+Hillfort Tracker helps store a personilsed collection of visited (or soon to be visited) tourist sites or Hillforts. You can manage your collection, store photos, add personal notes, mark a location as visited and also keep track geographically using Google Maps to highlight your collection of sites on the map.
 
-
-Once a hillfort is created it is visible on the main Hillforts list page (View), in a card format. 
-The card will display the information above.
-
-Hillforts can be edited by clicking the Hillfort card itself. 
-The Hillfort itself can be removed from within the edit page via the 'delete' option.
-To 'Cancel' any action or changes, press phone [back] button. 
+Brief YouTube video walkthrough of the app in action: 
 
 
 
