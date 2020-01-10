@@ -10,6 +10,7 @@ import org.jetbrains.anko.*
 import org.wit.hillfort.R
 import org.wit.hillfort.helpers.readImageFromPath
 import org.wit.hillfort.models.HillfortModel
+import org.wit.hillfort.models.Location
 import org.wit.hillfort.views.BaseView
 
 class HillfortView : BaseView(), AnkoLogger {
@@ -47,8 +48,12 @@ class HillfortView : BaseView(), AnkoLogger {
         } else {
             chooseImage.setText(R.string.button_addImage)
         }
-        lat.setText("%.6f".format(hillfort.lat))
-        lng.setText("%.6f".format(hillfort.lng))
+        this.showLocation(hillfort.location)
+    }
+
+    override fun showLocation(location: Location) {
+        lat.setText("%.6f".format(location.lat))
+        lng.setText("%.6f".format(location.lng))
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
