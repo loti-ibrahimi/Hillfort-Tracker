@@ -22,5 +22,5 @@
     <string name="hillfort_description_placeholder">Hillfort Description</string>
     <string name="title_activity_hillfort_list">Hillfort Collection</string>
     <string name="title_activity_hillfort">Add/Edit Hillfort</string>
-    <string name="title_activity_edit_location">Edit Location</string>
+    <string name="title_activity_edit_location">Hillfort Location</string>
 </resources>
